@@ -6,7 +6,6 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 
 const app = express();
-const port = 3000;
 
 // Access your API key as an environment variable
 const api_key = process.env.API_KEY;
@@ -57,6 +56,7 @@ app.post("/generate-text/:prompt", async (req, res) => {
   }
 });
 
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
