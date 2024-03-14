@@ -20,21 +20,29 @@ const genAI = new GoogleGenerativeAI(api_key);
 app.use(bodyParser.json());
 
 // Updated route to accept prompt as a parameter
-app.post("/generate-text/:prompt", async (req, res) => {
+app.get("/", async (req, res) => {
+  res.status(200).json({
+    status: "success",
+    data: "Welcome to Gemini API by Akarsh Rajput",
+  });
+});
+app.post("/generate-text", async (req, res) => {
   try {
     // Initialize the generative model
     const modelName = "gemini-pro"; // Replace with the desired model name
     const model = genAI.getGenerativeModel({ model: modelName });
 
     // Extract prompt from URL parameter
-    const prompt = req.params.prompt || "Write a story about a magic backpack.";
+    const prompt = req.body.prompt || "Write a story about a magic backpack.";
 
     // Generate text from text-only input
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
 
-    res.status(200).json({ success: true, generatedText: text });
+    res
+      .status(200)
+      .json({ status: "success", generatedText: text, by: "Akarsh Rajput" });
   } catch (error) {
     if (
       error.name === "GoogleGenerativeAIResponseError" &&
