@@ -4,7 +4,8 @@
   "description": "This is the API of Gemini API",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "build": "npm i"
   },
   "author": "Akarsh Rajput",
   "license": "ISC",
