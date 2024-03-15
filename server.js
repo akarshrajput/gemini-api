@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const dotenv = require("dotenv");
+const cors = require("cors");
 // For config.env file
 dotenv.config({ path: "./config.env" });
 
@@ -18,6 +19,8 @@ if (!api_key) {
 const genAI = new GoogleGenerativeAI(api_key);
 
 app.use(bodyParser.json());
+
+app.use(cors());
 
 // Updated route to accept prompt as a parameter
 app.get("/", async (req, res) => {
